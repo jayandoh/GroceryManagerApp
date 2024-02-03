@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Fridge Assistant</string>
+    <string name="pick_expiration_date">Pick Expiration Date</string>
+</resources>
