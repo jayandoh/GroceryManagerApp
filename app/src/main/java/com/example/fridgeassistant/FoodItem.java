@@ -31,13 +31,8 @@ public class FoodItem {
         this.tag = tag;
     }
 
-//    public Calendar getExp_date() {
-//        return exp_date;
-//    }
-
     public String getExp_date() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-        return sdf.format(exp_date);
+        return exp_date;
     }
 
     public void setExp_date(Calendar exp_date) {
