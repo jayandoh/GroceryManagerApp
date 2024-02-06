@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodViewHolder> {
@@ -29,7 +30,18 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         holder.foodNameView.setText(items.get(position).getName());
         holder.tagView.setText(items.get(position).getTag());
-//        holder.expDateView.setText(items.get(position).getExp_date());
+
+        // Convert FoodItem Calendar attribute to String so it can be displayed
+        Calendar calendar = items.get(position).getExp_date();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        month = month + 1;
+        String date = month+"/"+day+"/"+year;
+
+        holder.expDateView.setText(date);
     }
 
     @Override

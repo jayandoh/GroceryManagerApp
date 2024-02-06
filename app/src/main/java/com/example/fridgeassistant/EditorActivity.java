@@ -12,9 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class EditorActivity extends AppCompatActivity {
     Button expButton;
@@ -30,7 +28,7 @@ public class EditorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-        // Date Picker Dialog code
+        // Date Picker Dialog
         expButton = findViewById(R.id.btn_expDate);
 
         Calendar calendar = Calendar.getInstance();
@@ -57,7 +55,7 @@ public class EditorActivity extends AppCompatActivity {
             }
         };
 
-        // Add button code
+        // Add Button
         addButton = findViewById(R.id.btn_submit);
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -65,15 +63,6 @@ public class EditorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Create intent to MainActivity
                 Intent intent = new Intent(EditorActivity.this, MainActivity.class);
-
-
-                ArrayList<String> foodList = (ArrayList<String>) getIntent().getSerializableExtra("foodList");
-
-                // Add variables
-                intent.putStringArrayListExtra("myList", new ArrayList<>(foodList));
-                Calendar expDate = Calendar.getInstance();
-                expDate.set(2024,2,1);
-                foodList.add(new FoodItem("Celery","Veggie", expDate));
 
                 // Clear backstack and return to MainActivity
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);                                    // clear back stack
