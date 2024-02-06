@@ -16,7 +16,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editTextText"
+      app:layout_constraintTop_toBottomOf="@+id/etxt_tag"
       app:layout_constraintVertical_bias="0.1" />
 
   <Button
@@ -32,30 +32,32 @@
       app:layout_constraintStart_toStartOf="parent" />
 
   <EditText
-      android:id="@+id/editTextText"
+      android:id="@+id/etxt_tag"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:ems="5"
+      android:layout_height="48dp"
+      android:ems="6"
       android:inputType="text"
       android:hint="Tag"
       android:textAlignment="center"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      android:autofillHints="" />
 
   <EditText
-      android:id="@+id/editTextText2"
+      android:id="@+id/etxt_foodName"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_height="48dp"
       android:layout_marginTop="256dp"
-      android:ems="5"
+      android:ems="6"
       android:inputType="text"
       android:hint="Food"
       android:textAlignment="center"
-      app:layout_constraintBottom_toTopOf="@+id/editTextText"
+      app:layout_constraintBottom_toTopOf="@+id/etxt_tag"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.5" />
+      app:layout_constraintVertical_bias="0.5"
+      android:autofillHints="" />
 </androidx.constraintlayout.widget.ConstraintLayout>

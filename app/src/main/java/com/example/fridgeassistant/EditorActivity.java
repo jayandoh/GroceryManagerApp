@@ -28,6 +28,9 @@ public class EditorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
+        nameEditTxt = findViewById(R.id.etxt_foodName);
+        tagEditTxt = findViewById(R.id.etxt_tag);
+
         // Date Picker Dialog
         expButton = findViewById(R.id.btn_expDate);
 
@@ -61,12 +64,17 @@ public class EditorActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = nameEditTxt.getText().toString();
+                String tag = tagEditTxt.getText().toString();
+
                 // Create intent to MainActivity
-                Intent intent = new Intent(EditorActivity.this, MainActivity.class);
+                Intent resultIntent = new Intent();
 
                 // Clear backstack and return to MainActivity
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);                                    // clear back stack
-                startActivity(intent);                                                              // go back to MainActivity
+                resultIntent.putExtra("name", name);
+                resultIntent.putExtra("tag", tag);
+                resultIntent.putExtra("expDate", calendar);
+                setResult(RESULT_OK, resultIntent);
                 finish();
             }
         });
