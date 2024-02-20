@@ -1,8 +1,12 @@
 package com.example.fridgeassistant;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class FoodDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
@@ -32,5 +36,35 @@ public class FoodDbHelper extends SQLiteOpenHelper {
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    public void addFoodItemToDatabase(Context context, FoodItem foodItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_NAME, foodItem.getName());
+        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG, foodItem.getTag());
+        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_EXP_DATE, foodItem.getExp_date().getTimeInMillis()); // Convert Calendar to milliseconds
+
+        // Insert new row and return primary key value of the new row
+        long newRowId = db.insert(FoodItemContract.FoodItemEntry.TABLE_NAME, null, values);
+
+        // Check if insertion was successful
+        if (newRowId != -1) {
+            Toast.makeText(context, "Food item added to database", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(context, "Failed to add food item to database", Toast.LENGTH_SHORT).show();
+        }
+
+        db.close();
+    }
+
+    public void removeFoodItemFromDatabase(FoodItem foodItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = FoodItemContract.FoodItemEntry.COLUMN_NAME_NAME + " = ?";
+        String[] selectionArgs = { foodItem.getName() };
+        db.delete(FoodItemContract.FoodItemEntry.TABLE_NAME, selection, selectionArgs);
+        db.close();
     }
 }
