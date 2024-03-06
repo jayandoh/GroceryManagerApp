@@ -1,12 +1,10 @@
-package com.example.fridgeassistant;
+package com.example.fridgeassistant.Food;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
-
-import java.util.Calendar;
 
 public class FoodDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
@@ -65,6 +63,33 @@ public class FoodDbHelper extends SQLiteOpenHelper {
         String selection = FoodItemContract.FoodItemEntry.COLUMN_NAME_NAME + " = ?";
         String[] selectionArgs = { foodItem.getName() };
         db.delete(FoodItemContract.FoodItemEntry.TABLE_NAME, selection, selectionArgs);
+        db.close();
+    }
+
+    public void updateFoodItemInDatabase(Context context, FoodItem foodItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_NAME, foodItem.getName());
+        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG, foodItem.getTag());
+        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_EXP_DATE, foodItem.getExp_date().getTimeInMillis());
+
+        String selection = FoodItemContract.FoodItemEntry._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(foodItem.getId()) };
+
+        int count = db.update(
+                FoodItemContract.FoodItemEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+
+        if (count > 0) {
+            Toast.makeText(context, "Food item updated in database", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(context, "Failed to update food item in database", Toast.LENGTH_SHORT).show();
+        }
+
         db.close();
     }
 }

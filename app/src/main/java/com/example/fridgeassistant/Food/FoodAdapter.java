@@ -1,4 +1,4 @@
-package com.example.fridgeassistant;
+package com.example.fridgeassistant.Food;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.fridgeassistant.R;
 
 import java.util.Calendar;
 import java.util.List;

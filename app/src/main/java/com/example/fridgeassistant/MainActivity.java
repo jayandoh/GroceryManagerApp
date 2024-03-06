@@ -1,32 +1,24 @@
 package com.example.fridgeassistant;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.fridgeassistant.Food.FoodAdapter;
+import com.example.fridgeassistant.Food.FoodDbHelper;
+import com.example.fridgeassistant.Food.FoodItem;
+import com.example.fridgeassistant.Food.FoodItemContract;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startEditorActivity();
+                startEditorDialog();
             }
         });
     }
@@ -79,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyItemRangeChanged(position, foodList.size());
                 dbHelper.removeFoodItemFromDatabase(foodItem);
             }
+
+            public void onLeftClicked(int position) {
+                FoodItem foodItem = foodList.get(position);
+                startEditorDialog(foodItem);
+            }
         });
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
@@ -95,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String[] projection = {
+                FoodItemContract.FoodItemEntry._ID,
                 FoodItemContract.FoodItemEntry.COLUMN_NAME_NAME,
                 FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG,
                 FoodItemContract.FoodItemEntry.COLUMN_NAME_EXP_DATE
@@ -111,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         );
 
         while (cursor.moveToNext()) {
+            long id = cursor.getLong(cursor.getColumnIndexOrThrow(FoodItemContract
+                    .FoodItemEntry._ID));
             String name = cursor.getString(cursor.getColumnIndexOrThrow(FoodItemContract
                     .FoodItemEntry.COLUMN_NAME_NAME));
             String tag = cursor.getString(cursor.getColumnIndexOrThrow(FoodItemContract
@@ -119,14 +119,27 @@ public class MainActivity extends AppCompatActivity {
                     .FoodItemEntry.COLUMN_NAME_EXP_DATE));
             Calendar expDate = Calendar.getInstance();
             expDate.setTimeInMillis(expDateMillis);
-            FoodItem item = new FoodItem(name, tag, expDate);
+
+            FoodItem item = new FoodItem(id, name, tag, expDate);
             foodList.add(item);
         }
         cursor.close();
     }
 
-    private void startEditorActivity() {
-        Intent intent = new Intent(MainActivity.this, EditorActivity.class);
-        startActivity(intent);
+    private void startEditorDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        EditorDialogFragment dialogFragment = new EditorDialogFragment();
+        dialogFragment.show(fragmentManager, "EditorDialog");
+    }
+
+    private void startEditorDialog(FoodItem foodItem) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        EditorDialogFragment dialogFragment = new EditorDialogFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("foodItem", foodItem);
+        dialogFragment.setArguments(bundle);
+
+        dialogFragment.show(fragmentManager, "EditorDialog");
     }
 }

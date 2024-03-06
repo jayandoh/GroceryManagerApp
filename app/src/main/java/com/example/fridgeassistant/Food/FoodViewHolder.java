@@ -1,9 +1,11 @@
-package com.example.fridgeassistant;
+package com.example.fridgeassistant.Food;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.fridgeassistant.R;
 
 public class FoodViewHolder extends RecyclerView.ViewHolder {
     TextView foodNameView, tagView, expDateView;

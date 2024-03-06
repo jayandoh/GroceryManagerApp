@@ -146,7 +146,7 @@ class SwipeController extends ItemTouchHelper.Callback {
     }
 
     private void drawButtons(Canvas c, RecyclerView.ViewHolder viewHolder) {
-        float buttonWidthWithoutPadding = buttonWidth - 20;
+        float buttonWidthWithoutPadding = buttonWidth;
         float corners = 0;
         final int leftColor = 0xFF5EA0D2;
         final int rightColor = 0xFFFA5C50;

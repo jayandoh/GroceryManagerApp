@@ -1,4 +1,4 @@
-package com.example.fridgeassistant;
+package com.example.fridgeassistant.Food;
 
 import android.provider.BaseColumns;
 
