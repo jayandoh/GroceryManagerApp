@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     .FoodItemEntry._ID));
             String name = cursor.getString(cursor.getColumnIndexOrThrow(FoodItemContract
                     .FoodItemEntry.COLUMN_NAME_NAME));
-            String tag = cursor.getString(cursor.getColumnIndexOrThrow(FoodItemContract
+            int tag = cursor.getInt(cursor.getColumnIndexOrThrow(FoodItemContract
                     .FoodItemEntry.COLUMN_NAME_TAG));
             long expDateMillis = cursor.getLong(cursor.getColumnIndexOrThrow(FoodItemContract
                     .FoodItemEntry.COLUMN_NAME_EXP_DATE));

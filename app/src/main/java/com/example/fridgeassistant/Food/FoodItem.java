@@ -8,19 +8,19 @@ import java.util.Calendar;
 public class FoodItem implements Parcelable {
     private long _id = -1;
     private String name;
-    private String tag;
+    private int tagId;
     private Calendar exp_date;
 
-    public FoodItem(String name, String tag, Calendar exp_date) {
+    public FoodItem(String name, int tag, Calendar exp_date) {
         this.name = name;
-        this.tag = tag;
+        this.tagId = tag;
         this.exp_date = exp_date;
     }
 
-    public FoodItem(long _id, String name, String tag, Calendar exp_date) {
+    public FoodItem(long _id, String name, int tag, Calendar exp_date) {
         this._id = _id;
         this.name = name;
-        this.tag = tag;
+        this.tagId = tag;
         this.exp_date = exp_date;
     }
 
@@ -38,11 +38,11 @@ public class FoodItem implements Parcelable {
         this.name = name;
     }
 
-    public String getTag() {
-        return tag;
+    public int getTagId() {
+        return tagId;
     }
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTagId(int tagId) {
+        this.tagId = tagId;
     }
 
     public Calendar getExp_date() {
@@ -56,7 +56,7 @@ public class FoodItem implements Parcelable {
     private FoodItem(Parcel in) {
         _id = in.readLong();
         name = in.readString();
-        tag = in.readString();
+        tagId = in.readInt();
         exp_date = (Calendar) in.readSerializable();
     }
 
@@ -80,7 +80,7 @@ public class FoodItem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(_id);
         dest.writeString(name);
-        dest.writeString(tag);
+        dest.writeInt(tagId);
         dest.writeSerializable(exp_date);
     }
 

@@ -1,6 +1,8 @@
 package com.example.fridgeassistant.Food;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -31,7 +33,22 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         holder.foodNameView.setText(items.get(position).getName());
-        holder.tagView.setText(items.get(position).getTag());
+
+        // Tag stuff
+        int tagId = items.get(position).getTagId();
+
+        if (tagId == R.id.tog_carb) {
+            holder.tagView.setText("Carb");
+        }
+        else if (tagId == R.id.tog_protein) {
+            holder.tagView.setText("Protein");
+        }
+        else if (tagId == R.id.tog_fat) {
+            holder.tagView.setText("Fat");
+        }
+        else {
+            holder.tagView.setText("HUH?");
+        }
 
         // Convert FoodItem Calendar attribute to String so it can be displayed
         Calendar calendar = items.get(position).getExp_date();

@@ -11,7 +11,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + FoodItemContract.FoodItemEntry.TABLE_NAME + " (" +
                     FoodItemContract.FoodItemEntry._ID + " INTEGER PRIMARY KEY," +
                     FoodItemContract.FoodItemEntry.COLUMN_NAME_NAME + " TEXT," +
-                    FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG + " TEXT," +
+                    FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG + " INTEGER," +
                     FoodItemContract.FoodItemEntry.COLUMN_NAME_EXP_DATE + " INTEGER)";
 
     private static final String SQL_DELETE_ENTRIES =
@@ -41,7 +41,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_NAME, foodItem.getName());
-        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG, foodItem.getTag());
+        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG, foodItem.getTagId());
         values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_EXP_DATE, foodItem.getExp_date().getTimeInMillis()); // Convert Calendar to milliseconds
 
         // Insert new row and return primary key value of the new row
@@ -71,7 +71,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_NAME, foodItem.getName());
-        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG, foodItem.getTag());
+        values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_TAG, foodItem.getTagId());
         values.put(FoodItemContract.FoodItemEntry.COLUMN_NAME_EXP_DATE, foodItem.getExp_date().getTimeInMillis());
 
         String selection = FoodItemContract.FoodItemEntry._ID + " = ?";

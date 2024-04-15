@@ -19,33 +19,50 @@
         android:inputType="text"
         android:textAlignment="center" />
 
-    <EditText
-        android:id="@+id/etxt_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/etxt_foodName"
-        android:layout_marginTop="10dp"
-        android:autofillHints=""
-        android:ems="6"
-        android:hint="Tag"
-        android:inputType="text"
-        android:textAlignment="center" />
+  <Button
+      android:id="@+id/btn_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/etxt_foodName"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="35dp" />
 
-    <Button
-        android:id="@+id/btn_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/etxt_tag"
-        android:layout_marginTop="24dp" />
+  <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+      android:id="@+id/togGroup_tags"
+      android:layout_width="210dp"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/btn_date"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="26dp">
 
-    <Button
-        android:id="@+id/btn_save"
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+        android:id="@+id/tog_carb"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_date"
-        android:layout_marginTop="84dp"
-        android:text="Add" />
+        android:layout_height="38dp"
+        android:text="Carb" />
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+        android:id="@+id/tog_protein"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:text="Protein" />
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+        android:id="@+id/tog_fat"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:text="Fat" />
+
+  </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+  <Button
+      android:id="@+id/btn_save"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/togGroup_tags"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="41dp"
+      android:layout_marginBottom="337dp"
+      android:text="Add" />
+
 </RelativeLayout>

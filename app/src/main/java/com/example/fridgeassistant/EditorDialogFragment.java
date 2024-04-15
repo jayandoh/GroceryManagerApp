@@ -22,13 +22,19 @@ import com.example.fridgeassistant.Food.FoodItem;
 
 import java.util.Calendar;
 
+import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
+import nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup;
+
 public class EditorDialogFragment extends DialogFragment {
     Button dateButton, addButton;
-    EditText nameEditTxt, tagEditTxt;
+    EditText nameEditTxt;
     DatePickerDialog.OnDateSetListener setListener;
     Calendar calendar = Calendar.getInstance();
     FoodDbHelper dbHelper;
     FoodItem editingItem;
+    ThemedToggleButtonGroup tagsToggleGroup;
+//    ThemedButton carbToggle, proteinToggle, fatToggle;
+    int tagId;
 
     @Override
     public void onStart()
@@ -56,9 +62,12 @@ public class EditorDialogFragment extends DialogFragment {
 
         // Layout variables
         nameEditTxt = dialogView.findViewById(R.id.etxt_foodName);
-        tagEditTxt = dialogView.findViewById(R.id.etxt_tag);
         dateButton = dialogView.findViewById(R.id.btn_date);
         addButton = dialogView.findViewById(R.id.btn_save);
+        tagsToggleGroup = dialogView.findViewById(R.id.togGroup_tags);
+//        carbToggle = dialogView.findViewById(R.id.tog_carb);
+//        proteinToggle = dialogView.findViewById(R.id.tog_protein);
+//        fatToggle = dialogView.findViewById(R.id.tog_fat);
 
         // If dialog is initiated with the EDIT button
         if (getArguments() != null && getArguments().containsKey("foodItem")) {
@@ -66,7 +75,7 @@ public class EditorDialogFragment extends DialogFragment {
 
             editingItem = getArguments().getParcelable("foodItem");
             nameEditTxt.setText(editingItem.getName());
-            tagEditTxt.setText(editingItem.getTag());
+            tagsToggleGroup.selectButton(editingItem.getTagId());
             calendar = editingItem.getExp_date();
         }
 
@@ -94,20 +103,25 @@ public class EditorDialogFragment extends DialogFragment {
             }
         };
 
+        tagsToggleGroup.setOnSelectListener((ThemedButton btn) -> {
+            tagId = btn.getId();
+            return kotlin.Unit.INSTANCE;
+        });
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editingItem == null) {
                     FoodItem foodItem = new FoodItem(
                             nameEditTxt.getText().toString(),
-                            tagEditTxt.getText().toString(),
+                            tagId,
                             calendar);
 
                     dbHelper.addFoodItemToDatabase(requireContext(), foodItem);
 
                 } else {
                     editingItem.setName(nameEditTxt.getText().toString());
-                    editingItem.setTag(tagEditTxt.getText().toString());
+                    editingItem.setTagId(tagId);
                     editingItem.setExp_date(calendar);
                     dbHelper.updateFoodItemInDatabase(requireContext(), editingItem);
                 }
