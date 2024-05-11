@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".EditorDialogFragment">
 
     <EditText
@@ -25,11 +25,12 @@
       android:layout_height="wrap_content"
       android:layout_below="@+id/etxt_foodName"
       android:layout_centerHorizontal="true"
-      android:layout_marginTop="35dp" />
+      android:layout_marginTop="35dp"
+      android:backgroundTint="@color/green" />
 
   <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
       android:id="@+id/togGroup_tags"
-      android:layout_width="210dp"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/btn_date"
       android:layout_centerHorizontal="true"
@@ -37,21 +38,39 @@
 
     <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
         android:id="@+id/tog_carb"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:text="Carb" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:toggle_icon="@drawable/ic_baguette"
+        app:toggle_selectedIcon="@drawable/ic_baguette"
+        app:toggle_selectedBackgroundColor="@color/green"
+        app:toggle_btnCornerRadius="50dp"
+        app:toggle_borderWidth="5dp"
+        app:toggle_borderColor="#C6C6C6"
+        app:toggle_iconPadding="20dp" />
 
     <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
         android:id="@+id/tog_protein"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:text="Protein" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:toggle_icon="@drawable/ic_steak"
+        app:toggle_selectedIcon="@drawable/ic_steak"
+        app:toggle_selectedBackgroundColor="@color/green"
+        app:toggle_btnCornerRadius="50dp"
+        app:toggle_borderWidth="5dp"
+        app:toggle_borderColor="#C6C6C6"
+        app:toggle_iconPadding="20dp" />
 
     <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
         android:id="@+id/tog_fat"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:text="Fat" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:toggle_icon="@drawable/ic_oil"
+        app:toggle_selectedIcon="@drawable/ic_oil"
+        app:toggle_selectedBackgroundColor="@color/green"
+        app:toggle_btnCornerRadius="50dp"
+        app:toggle_borderWidth="5dp"
+        app:toggle_borderColor="#C6C6C6"
+        app:toggle_iconPadding="20dp" />
 
   </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
@@ -63,6 +82,7 @@
       android:layout_centerHorizontal="true"
       android:layout_marginTop="41dp"
       android:layout_marginBottom="337dp"
+      android:backgroundTint="@color/green"
       android:text="Add" />
 
 </RelativeLayout>
